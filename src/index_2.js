@@ -7,6 +7,7 @@ const ul = document.querySelector("ul");
 const ADD = "ADD";
 const DELETE = "DELETE";
 
+//action creators
 const addToDo = (text) => {
   return {
     type: ADD,
