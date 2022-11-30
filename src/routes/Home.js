@@ -6,7 +6,7 @@ import { addToDo } from "../store";
 const Home = (props) => {
   const [text, setText] = useState("");
 
-  const toDos = useSelector(state => state);
+  const toDos = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const onChange = (e) => {
@@ -32,7 +32,7 @@ const Home = (props) => {
         <button>ADD</button>
       </form>
       <ul>
-        {toDos && toDos.map(toDo => <ToDo key={toDo.id} toDo={toDo}/>)}
+        {toDos && toDos.map((toDo) => <ToDo key={toDo.id} toDo={toDo} />)}
       </ul>
     </div>
   );
