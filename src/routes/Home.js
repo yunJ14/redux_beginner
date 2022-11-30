@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ToDo from "../components/ToDo";
 import { addToDo } from "../store";
 
 const Home = (props) => {
   const [text, setText] = useState("");
+
+  const toDos = useSelector(state => state);
+  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setText(e.target.value);
@@ -12,7 +15,7 @@ const Home = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.dAddToDo(text);
+    dispatch(addToDo(text));
     setText("");
   };
 
@@ -29,23 +32,10 @@ const Home = (props) => {
         <button>ADD</button>
       </form>
       <ul>
-        {props.toDos &&
-          props.toDos.map((toDo) => <ToDo toDo={toDo} key={toDo.id} />)}
+        {toDos && toDos.map(toDo => <ToDo key={toDo.id} toDo={toDo}/>)}
       </ul>
     </div>
   );
 };
 
-//store.getState()와 같이 state 사용하기 위함
-const mapStateToProps = (state, ownProps) => {
-  return { toDos: state };
-};
-
-//store.dispatch()와 같이 사용하기 위함
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    dAddToDo: (text) => dispatch(addToDo(text)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
